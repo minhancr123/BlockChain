@@ -6,7 +6,8 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
+import type { PropsWithChildren } from 'react';
+
 import {
   Button,
   ScrollView,
@@ -25,15 +26,20 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import { Input } from './android/app/src/Components/Input';
-import { RegisterScreen } from './android/app/src/Screens/Register';
-import { LoginScreen } from './android/app/src/Screens/Login';
+import { RegisterScreen } from './src/screens/Register';
+import { LoginScreen } from './src/screens/Login';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './src/screens/HomeScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
-const Stack = createStackNavigator();
-function Section({children, title}: SectionProps): React.JSX.Element {
+const Stack = createNativeStackNavigator();
+
+
+function Section({ children, title }: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -61,70 +67,18 @@ function Section({children, title}: SectionProps): React.JSX.Element {
 
 
 function App(): React.JSX.Element {
-  // const isDarkMode = useColorScheme() === 'dark';
-
-  // const backgroundStyle = {
-  //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  // };
-
-  // /*
-  //  * To keep the template simple and small we're adding padding to prevent view
-  //  * from rendering under the System UI.
-  //  * For bigger apps the reccomendation is to use `react-native-safe-area-context`:
-  //  * https://github.com/AppAndFlow/react-native-safe-area-context
-  //  *
-  //  * You can read more about it here:
-  //  * https://github.com/react-native-community/discussions-and-proposals/discussions/827
-  //  */
-  // const safePadding = '5%';
-
-  // return (
-  //   <View style={backgroundStyle}>
-  //     <StatusBar
-  //       barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-  //       backgroundColor={backgroundStyle.backgroundColor}
-  //     />
-  //     <ScrollView
-  //       style={backgroundStyle}>
-  //       <View style={{paddingRight: safePadding}}>
-  //         <Header/>
-  //       </View>
-  //       <View
-  //         style={{
-  //           backgroundColor: isDarkMode ? Colors.black : Colors.white,
-  //           paddingHorizontal: safePadding,
-  //           paddingBottom: safePadding,
-  //         }}>
-  //         <Section title="Step One">
-  //           Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-  //           screen and then come back to see your edits.
-  //         </Section>
-  //         <Section title="See Your Changes">
-  //           <ReloadInstructions />
-  //         </Section>
-  //         <Section title="Debug">
-  //           <DebugInstructions />
-  //         </Section>
-  //         <Section title="Learn More">
-  //           Read the docs to discover what to do next:
-  //         </Section>
-  //         <LearnMoreLinks />
-  //       </View>
-  //     </ScrollView>
-  //   </View>
-  // );
-      return(
-        // <NavigationContainer>
-        //   <Stack.Navigator>
-
-        //   <Stack.Screen name="register" component={RegisterScreen}></Stack.Screen>
-        //   <Stack.Screen name = "login" component={LoginScreen}></Stack.Screen>
-        //   </Stack.Navigator>
-        // </NavigationContainer>
-        <View>
-          <RegisterScreen></RegisterScreen>
-        </View>
-      );
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ title: 'Welcome' }}
+        />
+        <Stack.Screen name="Register" component={RegisterScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
 
 const styles = StyleSheet.create({
