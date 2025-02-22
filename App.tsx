@@ -24,11 +24,12 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import { Input } from './android/app/src/Components/Input';
-import { RegisterScreen } from './android/app/src/Screens/Register';
-import { LoginScreen } from './android/app/src/Screens/Login';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {Input} from './android/app/src/Components/Input';
+import {RegisterScreen} from './android/app/src/Screens/Register';
+import {LoginScreen} from './android/app/src/Screens/Login';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import VerificationScreen from './android/app/src/Screens/Verification';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -58,7 +59,6 @@ function Section({children, title}: SectionProps): React.JSX.Element {
     </View>
   );
 }
-
 
 function App(): React.JSX.Element {
   // const isDarkMode = useColorScheme() === 'dark';
@@ -113,18 +113,18 @@ function App(): React.JSX.Element {
   //     </ScrollView>
   //   </View>
   // );
-      return(
-        // <NavigationContainer>
-        //   <Stack.Navigator>
+  return (
+    // <NavigationContainer>
+    //   <Stack.Navigator>
 
-        //   <Stack.Screen name="register" component={RegisterScreen}></Stack.Screen>
-        //   <Stack.Screen name = "login" component={LoginScreen}></Stack.Screen>
-        //   </Stack.Navigator>
-        // </NavigationContainer>
-        <View>
-          <RegisterScreen></RegisterScreen>
-        </View>
-      );
+    //   <Stack.Screen name="register" component={RegisterScreen}></Stack.Screen>
+    //   <Stack.Screen name = "login" component={LoginScreen}></Stack.Screen>
+    //   </Stack.Navigator>
+    // </NavigationContainer>
+    <View>
+      <VerificationScreen></VerificationScreen>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
