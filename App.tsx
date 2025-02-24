@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import type { PropsWithChildren } from 'react';
+import type {PropsWithChildren} from 'react';
 
 import {
   Button,
@@ -25,21 +25,23 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import { Input } from './android/app/src/Components/Input';
-import { RegisterScreen } from './src/screens/Register';
-import { LoginScreen } from './src/screens/Login';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {Input} from './android/app/src/Components/Input';
+import {RegisterScreen} from './src/screens/Register';
+import {LoginScreen} from './src/screens/Login';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
+import VerificationScreen from './src/screens/Verification';
+import UploadFileScreen from './src/screens/UpLoadFile';
+import CertificateHistoryScreen from './src/screens/CertificateHIstory';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 const Stack = createNativeStackNavigator();
 
-
-function Section({ children, title }: SectionProps): React.JSX.Element {
+function Section({children, title}: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -65,17 +67,39 @@ function Section({ children, title }: SectionProps): React.JSX.Element {
   );
 }
 
-
 function App(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Login"
           component={LoginScreen}
-          options={{ title: 'Welcome' }}
+          options={{title: 'Welcome'}}
         />
         <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen
+          name="Verification"
+          component={VerificationScreen}
+          options={{title: 'Xác thực'}}
+        />
+
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{title: 'Trang chủ'}}
+        />
+
+        <Stack.Screen
+          name="UploadFile"
+          component={UploadFileScreen}
+          options={{title: 'Upload file'}}
+        />
+
+        <Stack.Screen
+          name="CertificateHistory"
+          component={CertificateHistoryScreen}
+          options={{title: 'Lịch sử truy vấn'}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
