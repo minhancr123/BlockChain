@@ -36,6 +36,7 @@ import ProfileScreen from './src/screens/ProfileScreen';
 import VerificationScreen from './src/screens/Verification';
 import UploadFileScreen from './src/screens/UpLoadFile';
 import CertificateHistoryScreen from './src/screens/CertificateHIstory';
+import SecuritySettingScreen from './src/screens/SecuritySetting';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -99,6 +100,12 @@ function App(): React.JSX.Element {
           name="CertificateHistory"
           component={CertificateHistoryScreen}
           options={{title: 'Lịch sử truy vấn'}}
+        />
+
+        <Stack.Screen
+          name="SecuritySettings"
+          component={SecuritySettingScreen}
+          options={{title: 'Cấu hình bảo mật'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

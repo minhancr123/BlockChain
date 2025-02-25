@@ -31,19 +31,19 @@ const HomeScreen = () => {
         <View style={styles.buttonContainer}>
           <ShareButton
             name="Xác thực bằng cấp"
-            onPress={() => navigation.navigate('Verification')} // ✅ Chuyển đến màn hình xác thực
+            onPress={() => navigation.navigate('Verification')}
             btnStyles={styles.button}
             textStyles={styles.buttonText}
           />
           <ShareButton
             name="Lịch sử truy vấn"
-            onPress={() => navigation.navigate('CertificateHistory')} // ✅ Chuyển đến lịch sử truy vấn
+            onPress={() => navigation.navigate('CertificateHistory')}
             btnStyles={styles.button}
             textStyles={styles.buttonText}
           />
           <ShareButton
             name="Cấu hình bảo mật"
-            onPress={() => navigation.navigate('SecuritySettings')} // ✅ Chuyển đến cài đặt bảo mật
+            onPress={() => navigation.navigate('SecuritySettings')}
             btnStyles={styles.button}
             textStyles={styles.buttonText}
           />
