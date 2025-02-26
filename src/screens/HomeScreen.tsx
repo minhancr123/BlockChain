@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import ShareButton from '../components/ShareButton';
 
 const HomeScreen = () => {
-  const navigation = useNavigation(); // ✅ Lấy navigation để điều hướng trang
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
