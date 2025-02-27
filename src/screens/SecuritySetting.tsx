@@ -2,17 +2,19 @@ import React from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import ShareButton from '../components/ShareButton';
 import {APP_COLOR} from '../utils/constant';
-
+import {useNavigation} from '@react-navigation/native';
 const SecuritySettingScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
         <Image
-          source={require('../../assets/icon/User.png')}
+          source={require('../../assets/icon/securesets.png')}
           style={styles.image}
         />
-        <Text style={styles.headerText}>Cấu hình{'\n'}bảo mật</Text>
+        <Text style={styles.headerText}>Cấu hình{'\n'}          bảo mật   </Text>
       </View>
 
       {/* Danh sách tính năng */}
@@ -20,19 +22,23 @@ const SecuritySettingScreen = () => {
         {renderOption(
           'Lưu Private Key',
           require('../../assets/icon/Access.png'),
+          () => console.log('Lưu Private Key được nhấn')
         )}
         {renderOption(
           'Xuất file mã hóa',
           require('../../assets/icon/Password.png'),
+          () => console.log('Xuất file mã hóa được nhấn')
         )}
         {renderOption(
           'Xác thực 2 lớp',
           require('../../assets/icon/fingerprint.png'),
+          () => console.log('Xác thực 2 lớp được nhấn')
         )}
       </View>
 
+
       {/* Nút Quay lại */}
-      <TouchableOpacity style={styles.backButton}>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('Home')}>
         <Image
           source={require('../../assets/icon/arrow-left.png')}
           style={styles.backIcon}
@@ -54,37 +60,48 @@ const SecuritySettingScreen = () => {
 };
 
 // Component hiển thị mỗi dòng trong danh sách
-const renderOption = (title: string, iconSource: any) => {
+const renderOption = (title: string, iconSource: any, onPress: () => void) => {
   return (
-    <View style={styles.optionItem}>
+    <TouchableOpacity style={styles.optionItem} onPress={onPress}>
       <Text style={styles.optionText}>{title}</Text>
       <Image source={iconSource} style={styles.optionIcon} />
-    </View>
+    </TouchableOpacity>
   );
 };
+
 
 // Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    padding: 20,
+    padding: 0,
   },
   header: {
-    alignItems: 'center',
+    flexDirection: 'row-reverse', 
+    alignItems: 'center', 
+    justifyContent: 'flex-start', 
     marginBottom: 20,
+    backgroundColor: '#D9D9D9',
+    borderRadius: 15,
+    padding: 20,
+    height: 250,
+   
   },
   image: {
-    width: 150,
-    height: 100,
+    width: 200, 
+    height: 200,
     resizeMode: 'contain',
+    marginRight: 20, 
   },
   headerText: {
-    fontSize: 18,
+    fontSize: 25,
     fontWeight: 'bold',
-    textAlign: 'center',
+    textAlign: 'left', 
+    marginRight: 20,
   },
   optionsContainer: {
+    padding: 20,
     backgroundColor: '#fff',
     borderRadius: 10,
     overflow: 'hidden',
@@ -92,25 +109,31 @@ const styles = StyleSheet.create({
   optionItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
+    paddingVertical: 26,
+    paddingHorizontal: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#E0E0E0',
+    
   },
   optionText: {
-    fontSize: 16,
+    fontSize: 25,
     color: '#333',
+    fontWeight: 'bold',
   },
   optionIcon: {
-    width: 24,
-    height: 24,
+    width: 30,
+    height: 30,
     resizeMode: 'contain',
     tintColor: '#B0B0B0',
   },
   backButton: {
+    position: 'absolute',
+    bottom: 100,
+    left: 15,
+    right: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20,
+    justifyContent: 'flex-start',
   },
   backIcon: {
     width: 25,
@@ -124,14 +147,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   logoutContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 300,
-    textAlign: 'center',
-  },
+    flex: 1, 
+    justifyContent: 'flex-end', 
+    alignSelf: 'center',
+    marginBottom: 28,
+
+  },  
   logoutButton: {
-    width: 300,
+    width: 450,
     paddingVertical: 15,
     justifyContent: 'center',
     alignItems: 'center',

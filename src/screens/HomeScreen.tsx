@@ -2,7 +2,6 @@ import React from 'react';
 import {View, Text, Image, StyleSheet, SafeAreaView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import ShareButton from '../components/ShareButton';
-
 const HomeScreen = () => {
   const navigation = useNavigation(); // ✅ Lấy navigation để điều hướng trang
 
@@ -112,7 +111,7 @@ const styles = StyleSheet.create({
 
   /* Các nút */
   buttonContainer: {
-    width: 400,
+    width:400,
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
