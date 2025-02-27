@@ -1,12 +1,27 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
 
 export default function UploadFileScreen() {
+  const navigation = useNavigation();
+
+  const handleBackPress = () => {
+    navigation.goBack();
+  };
+
+  const handleUploadPress = () => {
+    Alert.alert('Upload', 'Upload file functionality goes here.');
+  };
+
+  const handleVerifyPress = () => {
+    Alert.alert('Verify', 'Verification functionality goes here.');
+  };
+
   return (
     <View style={styles.container}>
       {/* Nút quay lại */}
-      <TouchableOpacity style={styles.backButton}>
+      <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
         <Image
           source={require('../../assets/icon/arrow-left.png')}
           style={styles.backIcon}
@@ -23,13 +38,13 @@ export default function UploadFileScreen() {
         />
 
         {/* Nút tải file */}
-        <TouchableOpacity style={styles.uploadButton}>
+        <TouchableOpacity style={styles.uploadButton} onPress={handleUploadPress}>
           <Text style={styles.uploadText}>Tải File chứng chỉ lên tại đây</Text>
         </TouchableOpacity>
       </LinearGradient>
 
       {/* Nút xác minh */}
-      <TouchableOpacity style={styles.verifyButton}>
+      <TouchableOpacity style={styles.verifyButton} onPress={handleVerifyPress}>
         <Text style={styles.verifyText}>Xác minh</Text>
       </TouchableOpacity>
     </View>
@@ -88,7 +103,7 @@ const styles = StyleSheet.create({
   },
 
   uploadText: {
-    fontSize: 40,
+    fontSize: 20,
     color: '#fff',
     textAlign: 'center',
   },
@@ -97,13 +112,13 @@ const styles = StyleSheet.create({
     marginTop: 30,
     backgroundColor: '#3B5998',
     paddingVertical: 15,
-    paddingHorizontal: 170,
+    paddingHorizontal: 50,
     marginVertical: 10,
     borderRadius: 20,
   },
 
   verifyText: {
-    fontSize: 28,
+    fontSize: 20,
     color: '#fff',
     fontWeight: 'bold',
   },

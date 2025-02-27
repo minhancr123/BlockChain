@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {
   View,
@@ -9,6 +10,7 @@ import {
 } from 'react-native';
 
 export default function CertificateHistoryScreen() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       {/* Thanh chọn */}
@@ -47,7 +49,7 @@ export default function CertificateHistoryScreen() {
       </ScrollView>
 
       {/* Nút quay lại */}
-      <TouchableOpacity style={styles.backButton}>
+      <TouchableOpacity style={styles.backButton} onPress={() => { navigation.goBack() }}>
         <Image
           source={require('../../assets/icon/arrow-left.png')}
           style={styles.backIcon}

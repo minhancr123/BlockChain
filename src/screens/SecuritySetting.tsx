@@ -1,9 +1,11 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import ShareButton from '../components/ShareButton';
-import {APP_COLOR} from '../utils/constant';
+import { APP_COLOR } from '../utils/constant';
+import { useNavigation } from '@react-navigation/native';
 
 const SecuritySettingScreen = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -32,7 +34,7 @@ const SecuritySettingScreen = () => {
       </View>
 
       {/* Nút Quay lại */}
-      <TouchableOpacity style={styles.backButton}>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
         <Image
           source={require('../../assets/icon/arrow-left.png')}
           style={styles.backIcon}

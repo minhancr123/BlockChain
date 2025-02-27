@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -10,6 +11,9 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 
 export default function VerificationScreen() {
+
+  const navigate = useNavigation();
+
   const [selectedTab, setSelectedTab] = useState('verified');
   useEffect(() => {
     console.log(selectedTab);
@@ -38,8 +42,8 @@ export default function VerificationScreen() {
                 {tab === 'verified'
                   ? 'Đã xác thực'
                   : tab === 'pending'
-                  ? 'Chờ xác thực'
-                  : 'Xác thực không thành công'}
+                    ? 'Chờ xác thực'
+                    : 'Xác thực không thành công'}
               </Text>
             </TouchableOpacity>
           ))}
@@ -56,7 +60,7 @@ export default function VerificationScreen() {
             />
             <Text style={styles.statusText}>Đã xác thực</Text>
           </View>
-          <View style={{position: 'relative', width: '100%'}}>
+          <View style={{ position: 'relative', width: '100%' }}>
             <Image
               source={require('../../assets/icon/QR.png')}
               style={styles.qrIcon}
@@ -74,7 +78,7 @@ export default function VerificationScreen() {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.verifyButton}>
+        <TouchableOpacity style={styles.verifyButton} onPress={() => navigate.navigate('UploadFile')}>
           <Text style={styles.verifyText}>Xác thực bằng cấp</Text>
         </TouchableOpacity>
       </ScrollView>
