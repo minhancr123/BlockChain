@@ -43,6 +43,8 @@ import ListIdentity from './src/screens/admin/ListIdentity';
 import ListRequestsScreen from './src/screens/admin/ListRequests';
 import ListRequestsRejectedScreen from './src/screens/admin/ListRequestsRejected';
 import ConfirmCertification from './src/screens/admin/ConfirmCertification';
+import Register1 from './src/screens/admin/Register1';
+import Register2 from './src/screens/admin/Register2';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -78,7 +80,7 @@ function App(): React.JSX.Element {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="AdminHome">
+        <Stack.Navigator initialRouteName="Register1">
           <Stack.Screen
             name="Login"
             component={LoginScreen}
@@ -138,6 +140,16 @@ function App(): React.JSX.Element {
             name="ConfirmCertification"
             component={ConfirmCertification}
             options={{ title: 'Confirm Certification', headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register1"
+            component={Register1}
+            options={{ title: 'Register 1', headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register2"
+            component={Register2}
+            options={{ title: 'Register 2', headerShown: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>
