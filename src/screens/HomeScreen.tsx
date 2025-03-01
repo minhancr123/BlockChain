@@ -41,8 +41,14 @@ const HomeScreen = () => {
             textStyles={styles.buttonText}
           />
           <ShareButton
-            name="Cấu hình bảo mật"
-            onPress={() => navigation.navigate('SecuritySettings')}
+            name="Quét mã QR"
+            onPress={() => navigation.navigate('QRScan')}
+            btnStyles={styles.button}
+            textStyles={styles.buttonText}
+          />
+          <ShareButton
+            name="Đổi mật khẩu"
+            onPress={() => navigation.navigate('ChangePassword')}
             btnStyles={styles.button}
             textStyles={styles.buttonText}
           />

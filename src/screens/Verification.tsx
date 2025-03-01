@@ -8,8 +8,12 @@ import {
   Image,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import ShareButton from '../components/ShareButton';
+import { useNavigation } from '@react-navigation/native';
 
 export default function VerificationScreen() {
+  const navigation = useNavigation(); // ✅ Lấy navigation để điều hướng trang
+  
   const [selectedTab, setSelectedTab] = useState('verified');
   useEffect(() => {
     console.log(selectedTab);
@@ -56,27 +60,23 @@ export default function VerificationScreen() {
             />
             <Text style={styles.statusText}>Đã xác thực</Text>
           </View>
-          <View style={{position: 'relative', width: '100%'}}>
-            <Image
-              source={require('../../assets/icon/QR.png')}
-              style={styles.qrIcon}
-            />
+          <View style={{ position: 'relative', width: '100%' }}>
+            <TouchableOpacity onPress={() => navigation.navigate('QRScreen')}>
+              <Image
+                source={require('../../assets/icon/QR.png')}
+                style={styles.qrIcon}
+              />
+            </TouchableOpacity>
           </View>
         </LinearGradient>
 
-        <TouchableOpacity style={styles.historyButton}>
-          <View style={styles.historyContainer}>
-            <Image
-              source={require('../../assets/icon/arrow-right.png')}
-              style={styles.arrowRightIcon}
-            />
-            <Text style={styles.historyText}>Lịch sử thay đổi bằng cấp</Text>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.verifyButton}>
-          <Text style={styles.verifyText}>Xác thực bằng cấp</Text>
-        </TouchableOpacity>
+        
+          <ShareButton
+            name="Xác thực bằng cấp"
+            onPress={() => navigation.navigate('VerifyCertificate')}
+            btnStyles={styles.verifyButton}
+            textStyles={styles.verifyText}
+          />
       </ScrollView>
     </View>
   );
@@ -88,8 +88,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingVertical: 16,
     paddingHorizontal: 0,
-    flex: 1, // Đảm bảo mở rộng toàn bộ màn hình
-    height: '100%', // Chiếm toàn bộ chiều cao màn hình
+    flex: 1, 
+    height: '100%',
   },
 
   tabContainer: {
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 50,
     padding: 5,
-    marginBottom: 20,
+    marginBottom: 0,
     minWidth: '100%',
   },
   text: {
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   card: {
-    width: '93%',
+    width: '90%',
     height: 600,
     borderRadius: 20,
     padding: 15,
@@ -193,14 +193,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   verifyButton: {
-    marginTop: 20,
+    marginTop: 30,
     backgroundColor: '#3B5998',
-    paddingVertical: 12,
-    paddingHorizontal: 30,
+    paddingVertical: 15,
+    paddingHorizontal: 100,
     borderRadius: 15,
   },
   verifyText: {
-    fontSize: 18,
+    fontSize: 20,
     color: '#fff',
     fontWeight: 'bold',
   },

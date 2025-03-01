@@ -49,7 +49,7 @@ const ShareButton = (props: IProps) => {
     <Pressable
       disabled={loading}
       style={({pressed}) => [
-        {opacity: pressed || loading ? 0.5 : 1, alignSelf: 'flex-start'},
+        {opacity: pressed || loading ? 0.5 : 1, alignSelf: 'center'},
         pressStyles,
       ]}
       onPress={onPress}>
