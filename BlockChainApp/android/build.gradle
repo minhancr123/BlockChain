@@ -15,6 +15,7 @@
             classpath("com.android.tools.build:gradle")
             classpath("com.facebook.react:react-native-gradle-plugin")
             classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+            // apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
         }
     }
 

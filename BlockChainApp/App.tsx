@@ -6,7 +6,8 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
+import type { PropsWithChildren } from 'react';
+
 import {
   Button,
   ScrollView,
@@ -25,15 +26,33 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import { Input } from './android/app/src/Components/Input';
-import { RegisterScreen } from './android/app/src/Screens/Register';
-import { LoginScreen } from './android/app/src/Screens/Login';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { RegisterScreen } from './src/screens/Register';
+import {LoginScreen} from './src/screens/Login';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import HomeScreen from './src/screens/HomeScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
+import VerificationScreen from './src/screens/Verification';
+import UploadFileScreen from './src/screens/UpLoadFile';
+import CertificateHistoryScreen from './src/screens/CertificateHIstory';
+import SecuritySettingScreen from './src/screens/SecuritySetting';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import AdminHomeScreen from './src/screens/admin/HomeAdminScreen';
+import ListIdentity from './src/screens/admin/ListIdentity';
+import ListRequestsScreen from './src/screens/admin/ListRequests';
+import ListRequestsRejectedScreen from './src/screens/admin/ListRequestsRejected';
+import ConfirmCertification from './src/screens/admin/ConfirmCertification';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { AuthProvider } from './AuthProvider';
+import {PinScreen} from './src/screens/PinScreen';
+
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 const Stack = createStackNavigator();
-function Section({children, title}: SectionProps): React.JSX.Element {
+
+function Section({ children, title }: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -59,72 +78,89 @@ function Section({children, title}: SectionProps): React.JSX.Element {
   );
 }
 
-
 function App(): React.JSX.Element {
-  // const isDarkMode = useColorScheme() === 'dark';
+  return (
+    <AuthProvider>
+    <SafeAreaView style={{ flex: 1 }}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Register">
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ title: 'Welcome', headerShown: false }}
+          />
+          
 
-  // const backgroundStyle = {
-  //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  // };
+       
+      
+        <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen
+          name="Verification"
+          component={VerificationScreen}
+          options={{title: 'Xác thực'}}
+        />
+          <Stack.Screen
+            name="Pin"
+            component={PinScreen}
+            options={{ title: 'Pin', headerShown: false }}
+          />
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ title: 'Trang chủ', headerShown: false }}
+          />
 
-  // /*
-  //  * To keep the template simple and small we're adding padding to prevent view
-  //  * from rendering under the System UI.
-  //  * For bigger apps the reccomendation is to use `react-native-safe-area-context`:
-  //  * https://github.com/AppAndFlow/react-native-safe-area-context
-  //  *
-  //  * You can read more about it here:
-  //  * https://github.com/react-native-community/discussions-and-proposals/discussions/827
-  //  */
-  // const safePadding = '5%';
+          <Stack.Screen
+            name="UploadFile"
+            component={UploadFileScreen}
+            options={{ title: 'Upload file', headerShown: false }}
+          />
 
-  // return (
-  //   <View style={backgroundStyle}>
-  //     <StatusBar
-  //       barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-  //       backgroundColor={backgroundStyle.backgroundColor}
-  //     />
-  //     <ScrollView
-  //       style={backgroundStyle}>
-  //       <View style={{paddingRight: safePadding}}>
-  //         <Header/>
-  //       </View>
-  //       <View
-  //         style={{
-  //           backgroundColor: isDarkMode ? Colors.black : Colors.white,
-  //           paddingHorizontal: safePadding,
-  //           paddingBottom: safePadding,
-  //         }}>
-  //         <Section title="Step One">
-  //           Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-  //           screen and then come back to see your edits.
-  //         </Section>
-  //         <Section title="See Your Changes">
-  //           <ReloadInstructions />
-  //         </Section>
-  //         <Section title="Debug">
-  //           <DebugInstructions />
-  //         </Section>
-  //         <Section title="Learn More">
-  //           Read the docs to discover what to do next:
-  //         </Section>
-  //         <LearnMoreLinks />
-  //       </View>
-  //     </ScrollView>
-  //   </View>
-  // );
-      return(
-        // <NavigationContainer>
-        //   <Stack.Navigator>
+          <Stack.Screen
+            name="CertificateHistory"
+            component={CertificateHistoryScreen}
+            options={{ title: 'Lịch sử truy vấn', headerShown: false }}
+          />
 
-        //   <Stack.Screen name="register" component={RegisterScreen}></Stack.Screen>
-        //   <Stack.Screen name = "login" component={LoginScreen}></Stack.Screen>
-        //   </Stack.Navigator>
-        // </NavigationContainer>
-        <View>
-          <RegisterScreen></RegisterScreen>
-        </View>
-      );
+         
+          <Stack.Screen
+            name="AdminHome"
+            component={AdminHomeScreen}
+            options={{ title: 'Admin Home', headerShown: false }}
+          />
+          <Stack.Screen
+            name="ListIdentity"
+            component={ListIdentity}
+            options={{ title: 'List Identity', headerShown: false }}
+          />
+          <Stack.Screen
+            name="ListRequests"
+            component={ListRequestsScreen}
+            options={{ title: 'List Requests Identities', headerShown: false }}
+          />
+          <Stack.Screen
+            name="ListRequestsRejected"
+            component={ListRequestsRejectedScreen}
+            options={{ title: 'List Requests Identities Rejected', headerShown: false }}
+          />
+          <Stack.Screen
+            name="ConfirmCertification"
+            component={ConfirmCertification}
+            options={{ title: 'Confirm Certification', headerShown: false }}
+          />
+    
+   
+        <Stack.Screen
+          name="SecuritySettings"
+          component={SecuritySettingScreen}
+          options={{title: 'Cấu hình bảo mật'}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+    </SafeAreaView>
+    </AuthProvider>
+    
+  );
 }
 
 const styles = StyleSheet.create({
