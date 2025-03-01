@@ -4,6 +4,8 @@ import { APP_COLOR } from '../../utils/constant';
 import ShareButton from '../../components/ShareButton';
 import { useNavigation } from '@react-navigation/native';
 import ShareInput from '../../components/ShareInput';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../utils/type.navigate';
 
 const styles = StyleSheet.create({
     container: {
@@ -77,8 +79,15 @@ const styles = StyleSheet.create({
     },
 });
 
+type NavigationProps = StackNavigationProp<RootStackParamList, 'Register1'>;
+
+interface Register1Props {
+    CommonName: string;
+    Organization: string;
+}
+
 const Register1 = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<NavigationProps>();
     return (
         <View style={styles.container}>
             {/* Hai lớp màu nền */}
@@ -133,7 +142,7 @@ const Register1 = () => {
                 />
                 <ShareButton
                     name="Tiếp theo"
-                    onPress={() => navigation.navigate("Register2")}
+                    onPress={() => navigation.navigate('Register2', { name: 'Register2' })}
                     textStyles={{
                         textTransform: 'uppercase',
                         color: '#fff',

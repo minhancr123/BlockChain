@@ -9,6 +9,12 @@ export const registerAPI = (username: string,
     state: string,
     locality: string
 ) => {
-    const url = `/register`
+    const url = `/ap1/v1/auth/register`
     return axios.post(url, { username, commonName, organization, organizationalUnit, country, state, locality })
+}
+
+export const loginAPI = (username: string, password: string) => {
+
+    const url = `/api/v1/auth/login`
+    return axios.post(url, { username: username, password })
 }

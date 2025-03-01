@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
     },
 });
 
-const Register2 = () => {
+const Register2 = ({ route, navigate }: any) => {
+    const { name } = route.params;
     const navigation = useNavigation();
     return (
         <View style={styles.container}>
@@ -127,7 +128,7 @@ const Register2 = () => {
             <View style={styles.buttonContainer}>
                 <ShareButton
                     name="Đăng ký"
-                    onPress={() => Alert.alert("Đăng ký thành công")}
+                    onPress={() => Alert.alert(name)}
                     textStyles={{
                         textTransform: 'uppercase',
                         color: '#fff',

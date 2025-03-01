@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import {
     View,
@@ -8,9 +9,11 @@ import {
     ScrollView,
     Image,
 } from 'react-native';
+import { RootStackParamList } from '../../utils/type.navigate';
+type NavigationProps = StackNavigationProp<RootStackParamList, 'ListRequests'>;
 
 export default function ListRequestsScreen() {
-    const navigation = useNavigation();
+    const navigation = useNavigation<NavigationProps>();
     return (
         <View style={styles.container}>
 

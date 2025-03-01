@@ -4,6 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import ShareButton from '../../components/ShareButton';
 import ShareInput from '../../components/ShareInput';
 import { APP_COLOR } from '../../utils/constant';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../utils/type.navigate';
 
 const DATA = [
     {
@@ -55,9 +57,10 @@ const DATA = [
         title: 'Tên danh tính',
     },
 ];
+type NavigationProps = StackNavigationProp<RootStackParamList, 'ListIdentity'>;
 
 const ListIdentity = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<NavigationProps>();
 
     return (
         <SafeAreaView style={styles.container}>

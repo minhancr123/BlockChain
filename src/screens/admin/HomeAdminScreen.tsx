@@ -3,10 +3,12 @@ import { View, Text, Image, StyleSheet, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import ShareButton from '../../components/ShareButton';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../utils/type.navigate';
 
+type NavigationProps = StackNavigationProp<RootStackParamList, 'AdminHome'>;
 
 const AdminHomeScreen = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<NavigationProps>();
 
     return (
         <SafeAreaView style={styles.container}>

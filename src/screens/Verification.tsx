@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
 import {
   View,
@@ -9,10 +10,12 @@ import {
   Image,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { RootStackParamList } from '../utils/type.navigate';
+type NavigationProps = StackNavigationProp<RootStackParamList, 'Verification'>;
 
 export default function VerificationScreen() {
 
-  const navigate = useNavigation();
+  const navigate = useNavigation<NavigationProps>();
 
   const [selectedTab, setSelectedTab] = useState('verified');
   useEffect(() => {

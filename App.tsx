@@ -45,10 +45,12 @@ import ListRequestsRejectedScreen from './src/screens/admin/ListRequestsRejected
 import ConfirmCertification from './src/screens/admin/ConfirmCertification';
 import Register1 from './src/screens/admin/Register1';
 import Register2 from './src/screens/admin/Register2';
+import { RootStackParamList } from './src/utils/type.navigate';
+import { PinScreen } from './src/screens/PinScreen';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function Section({ children, title }: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -80,7 +82,7 @@ function App(): React.JSX.Element {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Register1">
+        <Stack.Navigator initialRouteName="Login">
           <Stack.Screen
             name="Login"
             component={LoginScreen}
@@ -149,6 +151,11 @@ function App(): React.JSX.Element {
           <Stack.Screen
             name="Register2"
             component={Register2}
+            options={{ title: 'Register 2', headerShown: false }}
+          />
+          <Stack.Screen
+            name="PinScreen"
+            component={PinScreen}
             options={{ title: 'Register 2', headerShown: false }}
           />
         </Stack.Navigator>
