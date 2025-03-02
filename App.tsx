@@ -10,6 +10,7 @@ import type { PropsWithChildren } from 'react';
 
 import {
   Button,
+  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -37,8 +38,11 @@ import VerificationScreen from './src/screens/Verification';
 import UploadFileScreen from './src/screens/UpLoadFile';
 import CertificateHistoryScreen from './src/screens/CertificateHIstory';
 import SecuritySettingScreen from './src/screens/SecuritySetting';
-import { SafeAreaView } from 'react-native-safe-area-context/lib/typescript/src/SafeAreaView';
 import { RootStackParamList } from './src/utils/type.navigate';
+import QRCodeScannerScreen from './src/screens/QRScreen';
+import ChangePasswordScreen from './src/screens/ChangePassword';
+import VerifyCertificateScreen from './src/screens/VerifiCertificate';
+import QRCodeScreen from './src/screens/QRImage';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -74,7 +78,7 @@ function App(): React.JSX.Element {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
+        <Stack.Navigator initialRouteName="Home">
           <Stack.Screen
             name="Login"
             component={LoginScreen}
@@ -110,6 +114,10 @@ function App(): React.JSX.Element {
           component={SecuritySettingScreen}
           options={{title: 'Cấu hình bảo mật'}}
         />
+        <Stack.Screen name="QRScan" component={QRCodeScannerScreen} options={{title: 'Quét QR'}} />
+        <Stack.Screen name="ChangePassword" component={ChangePasswordScreen} options={{title: 'Đổi mật khẩu'}} />
+        <Stack.Screen name="VerifyCertificate" component={VerifyCertificateScreen} options={{title: 'Xác thực bằng cấp'}} />
+        <Stack.Screen name="QRScreen" component={QRCodeScreen} options={{title: 'Xác thực bằng cấp'}} />
       </Stack.Navigator>
     </NavigationContainer>
     </SafeAreaView>

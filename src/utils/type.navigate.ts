@@ -14,4 +14,8 @@ export type RootStackParamList = {
     Register1: undefined;
     Register2: { name: string };
     PinScreen: undefined;
+    QRScan: undefined;
+    ChangePassword: undefined;
+    VerifyCertificate: undefined;
+    QRScreen: undefined;
 };

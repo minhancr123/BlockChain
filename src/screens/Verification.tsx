@@ -10,8 +10,10 @@ import {
   Image,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import ShareButton from '../components/ShareButton';
 
 export default function VerificationScreen() {
+  const navigation = useNavigation(); // ✅ Lấy navigation để điều hướng trang
   const [selectedTab, setSelectedTab] = useState('verified');
   useEffect(() => {
     console.log(selectedTab);
@@ -59,10 +61,12 @@ export default function VerificationScreen() {
             <Text style={styles.statusText}>Đã xác thực</Text>
           </View>
           <View style={{position: 'relative', width: '100%'}}>
-            <Image
-              source={require('../../assets/icon/QR.png')}
-              style={styles.qrIcon}
-            />
+          <TouchableOpacity onPress={() => navigation.navigate('QRScreen')}>
+              <Image
+                source={require('../../assets/icon/QR.png')}
+                style={styles.qrIcon}
+              />
+            </TouchableOpacity>
           </View>
         </LinearGradient>
 
@@ -76,9 +80,12 @@ export default function VerificationScreen() {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.verifyButton}>
-          <Text style={styles.verifyText}>Xác thực bằng cấp</Text>
-        </TouchableOpacity>
+        <ShareButton
+            name="Xác thực bằng cấp"
+            onPress={() => navigation.navigate('VerifyCertificate')}
+            btnStyles={styles.verifyButton}
+            textStyles={styles.verifyText}
+          />
       </ScrollView>
     </View>
   );
