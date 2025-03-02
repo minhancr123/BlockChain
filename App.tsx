@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
+import type { PropsWithChildren } from 'react';
 
 import {
   Button,
@@ -25,29 +25,24 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import {Input} from './android/app/src/Components/Input';
-import {RegisterScreen} from './src/screens/Register';
-import {LoginScreen} from './src/screens/Login';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { Input } from './android/app/src/Components/Input';
+import { RegisterScreen } from './src/screens/Register';
+import { LoginScreen } from './src/screens/Login';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import VerificationScreen from './src/screens/Verification';
 import UploadFileScreen from './src/screens/UpLoadFile';
 import CertificateHistoryScreen from './src/screens/CertificateHIstory';
 import SecuritySettingScreen from './src/screens/SecuritySetting';
-import QRCodeScannerScreen from './src/screens/QRScreen';
-import ChangePasswordScreen from './src/screens/ChangePassword';
-import VerifyCertificateScreen from './src/screens/VerifiCertificate';
-import QRCodeScreen from './src/screens/QRImage';
-
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
-function Section({children, title}: SectionProps): React.JSX.Element {
+function Section({ children, title }: SectionProps): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -75,49 +70,44 @@ function Section({children, title}: SectionProps): React.JSX.Element {
 
 function App(): React.JSX.Element {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{title: 'Welcome'}}
-        />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen
-          name="Verification"
-          component={VerificationScreen}
-          options={{title: 'Xác thực'}}
-        />
+    <SafeAreaView style={{ flex: 1 }}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ title: 'Welcome', headerShown: false }}
+          />
+          <Stack.Screen name="Register" component={RegisterScreen} />
+          <Stack.Screen
+            name="Verification"
+            component={VerificationScreen}
+            options={{ title: 'Xác thực', headerShown: false }}
+          />
 
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{title: 'Trang chủ'}}
-        />
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ title: 'Trang chủ', headerShown: false }}
+          />
 
-        <Stack.Screen
-          name="UploadFile"
-          component={UploadFileScreen}
-          options={{title: 'Upload file'}}
-        />
+          <Stack.Screen
+            name="UploadFile"
+            component={UploadFileScreen}
+            options={{ title: 'Upload file', headerShown: false }}
+          />
 
-        <Stack.Screen
-          name="CertificateHistory"
-          component={CertificateHistoryScreen}
-          options={{title: 'Lịch sử truy vấn'}}
-        />
+          <Stack.Screen
+            name="CertificateHistory"
+            component={CertificateHistoryScreen}
+            options={{ title: 'Lịch sử truy vấn', headerShown: false }}
+          />
 
         <Stack.Screen
           name="SecuritySettings"
           component={SecuritySettingScreen}
           options={{title: 'Cấu hình bảo mật'}}
         />
-        <Stack.Screen name="QRScan" component={QRCodeScannerScreen} options={{title: 'Quét QR'}} />
-        <Stack.Screen name="ChangePassword" component={ChangePasswordScreen} options={{title: 'Đổi mật khẩu'}} />
-        <Stack.Screen name="VerifyCertificate" component={VerifyCertificateScreen} options={{title: 'Xác thực bằng cấp'}} />
-        <Stack.Screen name="QRScreen" component={QRCodeScreen} options={{title: 'Xác thực bằng cấp'}} />
-
-
       </Stack.Navigator>
     </NavigationContainer>
   );

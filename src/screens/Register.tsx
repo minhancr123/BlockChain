@@ -6,20 +6,27 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import {Input} from '../../android/app/src/Components/Input';
-import {Button} from '../../android/app/src/Components/Button';
-import {useNavigation} from '@react-navigation/native';
+import { Input } from '../../android/app/src/Components/Input';
+import { Button } from '../../android/app/src/Components/Button';
+import { useNavigation } from '@react-navigation/native';
 import ShareButton from '../components/ShareButton';
-import {APP_COLOR} from '../utils/constant';
+import { APP_COLOR } from '../utils/constant';
 import ShareInput from '../components/ShareInput';
-import {useEffect} from 'react';
+import { useEffect } from 'react';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../utils/type.navigate';
 const unitIcon = require('../../assets/icon/Unit.png');
 const ModuleIcon = require('../../assets/icon/Module.png');
 const userIcon = require('../../assets/icon/User.png');
 const VectorIcon = require('../../assets/icon/Vector.png');
 const registerImage = require('../../assets/image/Register.png');
+
+
+
+type NavigationProps = StackNavigationProp<RootStackParamList, 'Register'>;
+
 export const RegisterScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProps>();
 
   return (
     <View>
@@ -27,7 +34,7 @@ export const RegisterScreen = () => {
         <Text style={styles.text}>Register</Text>
       </View>
 
-      <View style={{padding: 28}}>
+      <View style={{ padding: 28 }}>
         <ShareInput
           title="Common Name"
           onChangeText={() => console.log('Common Name')}
@@ -89,7 +96,7 @@ export const RegisterScreen = () => {
           color: '#fff',
           paddingVertical: 5,
         }}
-        pressStyles={{alignSelf: 'stretch'}}
+        pressStyles={{ alignSelf: 'stretch' }}
         btnStyles={{
           backgroundColor: APP_COLOR.PRIMARY,
           justifyContent: 'center',
@@ -106,9 +113,9 @@ export const RegisterScreen = () => {
           justifyContent: 'center',
           marginVertical: 15,
         }}>
-        <Text style={{color: 'black'}}>Bạn đã có tài khoản?</Text>
+        <Text style={{ color: 'black' }}>Bạn đã có tài khoản?</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Text style={{color: 'black', textDecorationLine: 'underline'}}>
+          <Text style={{ color: 'black', textDecorationLine: 'underline' }}>
             Đăng nhập
           </Text>
         </TouchableOpacity>

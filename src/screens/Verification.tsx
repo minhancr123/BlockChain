@@ -1,4 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -8,12 +10,8 @@ import {
   Image,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import ShareButton from '../components/ShareButton';
-import { useNavigation } from '@react-navigation/native';
 
 export default function VerificationScreen() {
-  const navigation = useNavigation(); // ✅ Lấy navigation để điều hướng trang
-  
   const [selectedTab, setSelectedTab] = useState('verified');
   useEffect(() => {
     console.log(selectedTab);
@@ -42,8 +40,8 @@ export default function VerificationScreen() {
                 {tab === 'verified'
                   ? 'Đã xác thực'
                   : tab === 'pending'
-                  ? 'Chờ xác thực'
-                  : 'Xác thực không thành công'}
+                    ? 'Chờ xác thực'
+                    : 'Xác thực không thành công'}
               </Text>
             </TouchableOpacity>
           ))}
@@ -60,23 +58,27 @@ export default function VerificationScreen() {
             />
             <Text style={styles.statusText}>Đã xác thực</Text>
           </View>
-          <View style={{ position: 'relative', width: '100%' }}>
-            <TouchableOpacity onPress={() => navigation.navigate('QRScreen')}>
-              <Image
-                source={require('../../assets/icon/QR.png')}
-                style={styles.qrIcon}
-              />
-            </TouchableOpacity>
+          <View style={{position: 'relative', width: '100%'}}>
+            <Image
+              source={require('../../assets/icon/QR.png')}
+              style={styles.qrIcon}
+            />
           </View>
         </LinearGradient>
 
-        
-          <ShareButton
-            name="Xác thực bằng cấp"
-            onPress={() => navigation.navigate('VerifyCertificate')}
-            btnStyles={styles.verifyButton}
-            textStyles={styles.verifyText}
-          />
+        <TouchableOpacity style={styles.historyButton}>
+          <View style={styles.historyContainer}>
+            <Image
+              source={require('../../assets/icon/arrow-right.png')}
+              style={styles.arrowRightIcon}
+            />
+            <Text style={styles.historyText}>Lịch sử thay đổi bằng cấp</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.verifyButton}>
+          <Text style={styles.verifyText}>Xác thực bằng cấp</Text>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );

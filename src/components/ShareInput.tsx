@@ -45,7 +45,7 @@ const ShareInput = (props: IProps) => {
             <View>
                 <TextInput
                     placeholder={title}
-                    value=""
+                    value={value}
                     onChangeText={onChangeText}
                     onFocus={() => setIsFocus(true)}
                     onBlur={(e) => { if (onBlur) onBlur(e); setIsFocus(false) }}
