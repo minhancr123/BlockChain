@@ -37,6 +37,8 @@ import VerificationScreen from './src/screens/Verification';
 import UploadFileScreen from './src/screens/UpLoadFile';
 import CertificateHistoryScreen from './src/screens/CertificateHIstory';
 import SecuritySettingScreen from './src/screens/SecuritySetting';
+import { SafeAreaView } from 'react-native-safe-area-context/lib/typescript/src/SafeAreaView';
+import { RootStackParamList } from './src/utils/type.navigate';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -110,6 +112,7 @@ function App(): React.JSX.Element {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </SafeAreaView>
   );
 }
 
