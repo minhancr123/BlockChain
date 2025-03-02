@@ -1,17 +1,42 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image, PermissionsAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Svg, { Rect } from 'react-native-svg';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import QRCodeScanner from 'react-native-qrcode-scanner';
+import { RNCamera } from 'react-native-camera';
 import { APP_COLOR } from '../utils/constant';
 
 const QRCodeScannerScreen = () => {
   const navigation = useNavigation();
   const [flashOn, setFlashOn] = useState(false);
 
+  const requestCameraPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        {
+          title: "Quyền sử dụng Camera",
+          message: "Ứng dụng cần quyền truy cập Camera để quét mã QR",
+          buttonPositive: "OK"
+        }
+      );
+      return granted === PermissionsAndroid.RESULTS.GRANTED;
+    } catch (err) {
+      console.warn(err);
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    requestCameraPermission();
+  }, []);
+
   const toggleFlash = () => {
     setFlashOn(!flashOn);
-    // Nếu muốn điều khiển flash thực tế, cần tích hợp với `react-native-torch`
+  };
+
+  const onSuccess = (e) => {
+    alert(`Mã QR: ${e.data}`); // Xử lý dữ liệu từ mã QR
   };
 
   return (
@@ -21,23 +46,22 @@ const QRCodeScannerScreen = () => {
         <Text style={styles.headerText}>Quét mã QR</Text>
       </View>
 
-      {/* Khung quét QR */}
-      <View style={styles.qrContainer}>
-        <Svg height="100%" width="100%">
-          <Rect x="15%" y="10%" width="70%" height="55%" stroke="black" strokeWidth="4" fill="none" />
-        </Svg>
+      <QRCodeScanner
+        onRead={onSuccess}
+        reactivate={true} // Cho phép quét liên tục
+        reactivateTimeout={2000} // Thời gian giữa các lần quét
+        flashMode={flashOn ? RNCamera.Constants.FlashMode.torch : RNCamera.Constants.FlashMode.off}
+        topViewStyle={{ display: 'none' }}
+        bottomViewStyle={{ display: 'none' }}
+        containerStyle={styles.qrContainer}
+        cameraStyle={styles.camera}
+      />
 
-        {/* Nút hướng dẫn */}
-        <TouchableOpacity style={styles.scanButton}>
-          <Text style={styles.scanButtonText}>Đưa mã QR vào giữa khung</Text>
-        </TouchableOpacity>
 
-        {/* Nút bật/tắt Flash */}
-        <TouchableOpacity style={styles.flashButton} onPress={toggleFlash}>
-          <Ionicons name={flashOn ? 'flash' : 'flash-off'} size={30} color="white" />
-        </TouchableOpacity>
-        
-      </View>
+      {/* Nút bật/tắt Flash */}
+      <TouchableOpacity style={styles.flashButton} onPress={toggleFlash}>
+        <Ionicons name={flashOn ? 'flash' : 'flash-off'} size={30} color="white" />
+      </TouchableOpacity>
 
       {/* Nút Quay lại */}
       <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
@@ -48,13 +72,12 @@ const QRCodeScannerScreen = () => {
   );
 };
 
-// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
   },
   header: {
     marginTop: 20,
@@ -65,34 +88,22 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   qrContainer: {
+    flex: 1,
     width: '100%',
-    height: '70%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#D3D3D3',
-    paddingVertical: 40,
-    marginBottom: 20,
-    position: 'relative',
   },
-  scanButton: {
-    position: 'absolute',
-    bottom: 150, // Cách nút flash 70px
-    backgroundColor: '#3B5998',
-    paddingVertical: 12,
-    paddingHorizontal: 28,
-    borderRadius: 8,
-  },
-  scanButtonText: {
-    color: '#fff',
-    fontSize: 20,
+  camera: {
+    height: '100%',
+    width: '100%',
   },
   flashButton: {
     position: 'absolute',
-    bottom: 75, // Đặt nút flash ngay dưới nút hướng dẫn
-    backgroundColor: '#fff', // Màu vàng cam
+    bottom: 100,
+    backgroundColor: 'black',
     width: 50,
     height: 50,
-    borderRadius: 25, // Hình tròn
+    borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
   },

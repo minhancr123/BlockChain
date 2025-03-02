@@ -95,14 +95,6 @@ const ChangePasswordScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.logoutContainer}>
-        <ShareButton
-          name="Đăng xuất"
-          onPress={() => console.log('Đăng xuất')}
-          btnStyles={styles.logoutButton}
-          textStyles={styles.logoutText}
-        />
-      </View>
     </View>
   );
 };
@@ -179,27 +171,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  logoutContainer: {
-    flex: 1,
-    justifyContent: 'flex-end', 
-    alignSelf: 'center',
-    marginBottom: 120,
 
-  },  
-  logoutButton: {
-    width: 196,
-    paddingVertical: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
-    marginLeft: '40%',
-
-  },
-  logoutText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
 });
 
 export default ChangePasswordScreen;

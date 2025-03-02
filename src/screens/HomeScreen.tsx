@@ -21,7 +21,7 @@ const HomeScreen = () => {
         {/* Hình minh họa */}
         <View style={styles.illustrationContainer}>
           <Image
-            source={require('../../assets/image/Register.png')}
+            source={require('../../assets/image/logoHuit.png')}
             style={styles.illustration}
           />
         </View>
@@ -48,6 +48,13 @@ const HomeScreen = () => {
           />
           <ShareButton
             name="Đổi mật khẩu"
+            onPress={() => navigation.navigate('ChangePassword')}
+            btnStyles={styles.button}
+            textStyles={styles.buttonText}
+          />
+
+          <ShareButton
+            name="Đăng xuất"
             onPress={() => navigation.navigate('ChangePassword')}
             btnStyles={styles.button}
             textStyles={styles.buttonText}
@@ -110,8 +117,8 @@ const styles = StyleSheet.create({
   },
 
   illustration: {
-    width: 440,
-    height: 440,
+    width: 500,
+    height: 250,
     resizeMode: 'contain',
   },
 
@@ -127,7 +134,7 @@ const styles = StyleSheet.create({
 
   button: {
     width: 400,
-    paddingVertical: 15,
+    paddingVertical: 20,
     marginVertical: 10,
     borderRadius: 30,
     backgroundColor: '#3B5998',
