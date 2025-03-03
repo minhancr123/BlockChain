@@ -43,6 +43,14 @@ import QRCodeScannerScreen from './src/screens/QRScreen';
 import ChangePasswordScreen from './src/screens/ChangePassword';
 import VerifyCertificateScreen from './src/screens/VerifiCertificate';
 import QRCodeScreen from './src/screens/QRImage';
+import AdminHomeScreen from './src/screens/admin/HomeAdminScreen';
+import ListIdentity from './src/screens/admin/ListIdentity';
+import ListRequestsScreen from './src/screens/admin/ListRequests';
+import ListRequestsRejectedScreen from './src/screens/admin/ListRequestsRejected';
+import ConfirmCertification from './src/screens/admin/ConfirmCertification';
+import Register1 from './src/screens/admin/Register1';
+import Register2 from './src/screens/admin/Register2';
+import { PinScreen } from './src/screens/PinScreen';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -88,7 +96,7 @@ function App(): React.JSX.Element {
           <Stack.Screen
             name="Verification"
             component={VerificationScreen}
-            options={{ title: 'Xác thực', headerShown: false }}
+            options={{ title: 'Xác thực', headerShown: true }}
           />
 
           <Stack.Screen
@@ -106,7 +114,7 @@ function App(): React.JSX.Element {
           <Stack.Screen
             name="CertificateHistory"
             component={CertificateHistoryScreen}
-            options={{ title: 'Lịch sử truy vấn', headerShown: false }}
+            options={{ title: 'Lịch sử truy vấn' }}
           />
 
         <Stack.Screen
@@ -118,6 +126,47 @@ function App(): React.JSX.Element {
         <Stack.Screen name="ChangePassword" component={ChangePasswordScreen} options={{title: 'Đổi mật khẩu'}} />
         <Stack.Screen name="VerifyCertificate" component={VerifyCertificateScreen} options={{title: 'Xác thực bằng cấp'}} />
         <Stack.Screen name="QRScreen" component={QRCodeScreen} options={{title: 'Xác thực bằng cấp'}} />
+
+        <Stack.Screen
+            name="AdminHome"
+            component={AdminHomeScreen}
+            options={{ title: 'Admin Home', headerShown: false }}
+          />
+          <Stack.Screen
+            name="ListIdentity"
+            component={ListIdentity}
+            options={{ title: 'List Identity', headerShown: false }}
+          />
+          <Stack.Screen
+            name="ListRequests"
+            component={ListRequestsScreen}
+            options={{ title: 'List Requests Identities', headerShown: false }}
+          />
+          <Stack.Screen
+            name="ListRequestsRejected"
+            component={ListRequestsRejectedScreen}
+            options={{ title: 'List Requests Identities Rejected', headerShown: false }}
+          />
+          <Stack.Screen
+            name="ConfirmCertification"
+            component={ConfirmCertification}
+            options={{ title: 'Confirm Certification', headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register1"
+            component={Register1}
+            options={{ title: 'Register 1', headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register2"
+            component={Register2}
+            options={{ title: 'Register 2', headerShown: false }}
+          />
+          <Stack.Screen
+            name="PinScreen"
+            component={PinScreen}
+            options={{ title: 'Register 2', headerShown: false }}
+          />
       </Stack.Navigator>
     </NavigationContainer>
     </SafeAreaView>

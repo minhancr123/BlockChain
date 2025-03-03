@@ -1,26 +1,45 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
 import { APP_COLOR } from '../utils/constant';
-import ShareButton from '../components/ShareButton';
+import { changePasswordAPI } from '../utils/api'; // Import API đổi mật khẩu
 
 const ChangePasswordScreen = () => {
   const [form, setForm] = useState({
-    username: null,
-    oldPassword: null,
-    newPassword: null,
-    confirmPassword: null,
+    username: "",
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: "",
   });
 
   const handleChange = (key: string, value: string) => {
     setForm({ ...form, [key]: value });
   };
 
-  const handleSubmit = () => {
-    console.log('Changing password...', form);
+  const handleSubmit = async () => {
+    const { username, oldPassword, newPassword, confirmPassword } = form;
+
+    // Kiểm tra dữ liệu nhập vào
+    if (!username || !oldPassword || !newPassword || !confirmPassword) {
+      Alert.alert("Lỗi", "Vui lòng nhập đầy đủ thông tin!");
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      Alert.alert("Lỗi", "Mật khẩu xác nhận không khớp!");
+      return;
+    }
+
+    // Gọi API
+    const result : any = await changePasswordAPI(username, oldPassword, newPassword, confirmPassword);
+
+    // Xử lý phản hồi từ API
+    if (result?.success) {
+      Alert.alert("Thành công", "Đổi mật khẩu thành công!");
+      setForm({ username: "", oldPassword: "", newPassword: "", confirmPassword: "" });
+    } else {
+      Alert.alert("Lỗi", result.message || "Đổi mật khẩu thất bại!");
+    }
   };
-  const handleLogout = () => {
-    console.log('Logging out...');
-  };
+
   return (
     <View style={styles.container}>
       {/* Background chia 2 phần */}
@@ -94,7 +113,6 @@ const ChangePasswordScreen = () => {
           <Text style={styles.buttonText}>Đổi mật khẩu</Text>
         </TouchableOpacity>
       </View>
-
     </View>
   );
 };
@@ -171,7 +189,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-
 });
 
 export default ChangePasswordScreen;

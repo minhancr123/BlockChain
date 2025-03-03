@@ -9,6 +9,7 @@ import { APP_COLOR } from '../utils/constant';
 const QRCodeScannerScreen = () => {
   const navigation = useNavigation();
   const [flashOn, setFlashOn] = useState(false);
+  const [hasCameraPermission, setHasCameraPermission] = useState(false);
 
   const requestCameraPermission = async () => {
     try {
@@ -20,7 +21,9 @@ const QRCodeScannerScreen = () => {
           buttonPositive: "OK"
         }
       );
-      return granted === PermissionsAndroid.RESULTS.GRANTED;
+      const permissionGranted = granted === PermissionsAndroid.RESULTS.GRANTED;
+      setHasCameraPermission(permissionGranted);
+      return permissionGranted;
     } catch (err) {
       console.warn(err);
       return false;
@@ -35,28 +38,30 @@ const QRCodeScannerScreen = () => {
     setFlashOn(!flashOn);
   };
 
-  const onSuccess = (e) => {
-    alert(`Mã QR: ${e.data}`); // Xử lý dữ liệu từ mã QR
+  const onSuccess = (e: any) => {
+    console.log(e);
+    // alert(`Mã QR: ${e.data}`); // Xử lý dữ liệu từ mã QR
   };
 
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.headerText}>Quét mã QR</Text>
+        {hasCameraPermission ? (
+          <QRCodeScanner
+            onRead={onSuccess}
+            reactivate={true} // Cho phép quét liên tục
+            reactivateTimeout={2000} // Thời gian giữa các lần quét
+            flashMode={flashOn ? RNCamera.Constants.FlashMode.torch : RNCamera.Constants.FlashMode.off}
+            topViewStyle={{ display: 'none' }}
+            bottomViewStyle={{ display: 'none' }}
+            containerStyle={styles.qrContainer}
+            cameraStyle={styles.camera}
+          />
+        ) : (
+          <Text>Đang chờ quyền truy cập Camera...</Text>
+        )}
       </View>
-
-      <QRCodeScanner
-        onRead={onSuccess}
-        reactivate={true} // Cho phép quét liên tục
-        reactivateTimeout={2000} // Thời gian giữa các lần quét
-        flashMode={flashOn ? RNCamera.Constants.FlashMode.torch : RNCamera.Constants.FlashMode.off}
-        topViewStyle={{ display: 'none' }}
-        bottomViewStyle={{ display: 'none' }}
-        containerStyle={styles.qrContainer}
-        cameraStyle={styles.camera}
-      />
-
 
       {/* Nút bật/tắt Flash */}
       <TouchableOpacity style={styles.flashButton} onPress={toggleFlash}>

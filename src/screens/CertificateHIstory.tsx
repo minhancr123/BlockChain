@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -8,8 +8,19 @@ import {
   ScrollView,
   Image,
 } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 export default function CertificateHistoryScreen() {
   const navigation = useNavigation(); // ✅ Lấy navigation để điều hướng trang
+  const [date, setDate] = useState(new Date());
+  const [showPicker, setShowPicker] = useState(false);
+
+  const handleDateChange = (event: any, selectedDate: Date | undefined) => {
+    setShowPicker(false);
+    if (selectedDate) {
+      setDate(selectedDate);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -18,21 +29,25 @@ export default function CertificateHistoryScreen() {
         <TouchableOpacity style={styles.filterButton}>
           <Text style={styles.filterText}>Tất cả</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => setShowPicker(true)}>
           <View style={styles.containerCalendar}>
             <Image
               source={require('../../assets/icon/calendar.png')}
               style={styles.calendarIcon}
             />
-            {/* <Image
-              source={require('../../assets/icon/arrow-down.png')}
-              style={styles.arrowDownIcon}
-            /> */}
-
             <View style={styles.arrowDownIcon} />
           </View>
         </TouchableOpacity>
       </View>
+
+      {showPicker && (
+        <DateTimePicker
+          value={date}
+          mode="date"
+          display="default"
+          onChange={handleDateChange}
+        />
+      )}
 
       {/* Danh sách bằng cấp */}
       <ScrollView contentContainerStyle={styles.scrollContainer}>
