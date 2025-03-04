@@ -3,7 +3,7 @@ import axios from "axios";
 import { Platform } from "react-native";
 
 
-const backend = "http://10.0.2.2:3000"
+const backend = "http://192.168.2.5:3000"
 
 const instance = axios.create({
     baseURL: backend

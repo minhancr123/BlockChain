@@ -32,8 +32,13 @@ export const LoginScreen = () => {
 
             const res = await loginAPI(username, password);
 
+            if (res.message == "Invalid credentials") {
+                Alert.alert("Thông báo", "Sai tên đăng nhập hoặc mật khẩu")
+                return;
+            }
+
             if (res.success === true) {
-                navigation.navigate("Home")
+                navigation.navigate("AdminHome")
             } else {
                 navigation.navigate("PinScreen")
             }
@@ -96,19 +101,6 @@ export const LoginScreen = () => {
                             }}
                         />
 
-                        <View style={{
-                            flexDirection: "row",
-                            gap: 10,
-                            justifyContent: "center",
-                            marginVertical: 15
-                        }}>
-                            <Text style={{ color: "black" }}>Chưa có có tài khoản?</Text>
-                            <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-                                <Text style={{ color: "black", textDecorationLine: "underline" }}>Đăng ký</Text>
-                            </TouchableOpacity>
-
-
-                        </View>
                     </View>
                 )}
             </Formik>

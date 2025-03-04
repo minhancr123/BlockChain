@@ -8,55 +8,82 @@ import {
     ScrollView,
     Image,
 } from 'react-native';
+import ShareInput from '../../components/ShareInput';
 
 export default function RefreshPassword() {
     const navigation = useNavigation();
     return (
         <View style={styles.container}>
-            <View style={{ backgroundColor: "#D3D3D3", height: 169, justifyContent: "center", alignItems: "center", marginBottom: 10 }}>
-                <Text style={{ fontSize: 24, fontWeight: 700 }}>Danh sách bằng cấp bị từ chối</Text>
+            <View style={{ backgroundColor: "#D3D3D3", height: 200, marginBottom: 10 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 20 }}>
+                    <View>
+                        <Text style={{ fontSize: 24, fontWeight: 700 }}>Cấp lại</Text>
+                        <Text style={{ fontSize: 24, fontWeight: 700, marginLeft: 30 }}> mật khẩu</Text>
+                    </View>
+
+                    <Image source={require('../../../assets/image/refreshpassword.png')} />
+                </View>
+                <TouchableOpacity style={styles.backButton} onPress={() => { navigation.goBack() }}>
+                    <Image
+                        source={require('../../../assets/icon/arrow-left.png')}
+                        style={styles.backIcon}
+                    />
+                    <Text style={styles.backText}>Quay lại</Text>
+                </TouchableOpacity>
+
+
             </View>
-            <View style={{ padding: 20 }}>
-                <View style={styles.filterContainer}>
-                    <TouchableOpacity style={styles.backButton} onPress={() => { navigation.goBack() }}>
-                        <Image
-                            source={require('../../../assets/icon/arrow-left.png')}
-                            style={styles.backIcon}
-                        />
-                        <Text style={styles.backText}>Quay lại</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.filterButton}>
-                        <Text style={styles.filterText}>Tất cả</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <View style={styles.containerCalendar}>
-                            <Image
-                                source={require('../../../assets/icon/calendar.png')}
-                                style={styles.calendarIcon}
-                            />
-
-
-                            <View style={styles.arrowDownIcon} />
-                        </View>
-                    </TouchableOpacity>
+            <View style={styles.content}>
+                <View style={{ width: '100%', margin: 20 }}>
+                    <ShareInput
+                        title="Tìm theo tên danh tính"
+                        onChangeText={() => console.log('User')}
+                        onBlur={() => console.log('User')}
+                        value={"User"}
+                    />
+                    <Image
+                        source={require('../../../assets/icon/search.png')}
+                        style={{ position: 'absolute', top: 15, right: 15 }}
+                    />
                 </View>
 
-                {/* Danh sách bằng cấp */}
-                <ScrollView contentContainerStyle={styles.scrollContainer}>
-                    {Array(5)
-                        .fill(0)
-                        .map((_, index) => (
-                            <View key={index} style={styles.card}>
-                                <Text style={styles.cardTitle}>Tên bằng cấp</Text>
-                                <Text style={styles.cardText}>Thời gian :</Text>
-                                <Text style={styles.cardText}>Người truy vấn:</Text>
-                                <Text style={styles.cardText}>Lý do:</Text>
-                            </View>
-                        ))}
-                </ScrollView>
+                <View style={styles.card}>
+                    <View style={{ marginVertical: 5 }}>
+                        <Text style={{ padding: 10, fontSize: 16, fontWeight: 600 }}>Tên danh tính</Text>
+                        <ShareInput
+                            title="Tên danh tính"
+                            onChangeText={() => console.log('Tên danh tính')}
+                            onBlur={() => console.log('Tên danh tính')}
+                            value={'Tên danh tính'}
+                            errors={'Tên danh tính'}
+                        />
+                    </View>
+                    <View style={{ marginVertical: 5 }}>
+                        <Text style={{ padding: 10, fontSize: 16, fontWeight: 600 }}>Mã số sinh viên</Text>
+                        <ShareInput
+                            title="MSSV"
+                            onChangeText={() => console.log('MSSV')}
+                            onBlur={() => console.log('MSSV')}
+                            value={'MSSV'}
+                            errors={'MSSV'}
+                        />
+                    </View>
 
-                {/* Nút quay lại */}
+                    <View style={{ marginVertical: 5 }}>
+                        <Text style={{ padding: 10, fontSize: 16, fontWeight: 600 }}>Căn cước công dân</Text>
+                        <ShareInput
+                            title="CCCD"
+                            onChangeText={() => console.log('CCCD')}
+                            onBlur={() => console.log('CCCD')}
+                            value={'CCCD'}
+                            errors={'CCCD'}
+                        />
+                    </View>
+
+
+
+
+                </View>
 
             </View>
 
@@ -81,7 +108,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     filterButton: {
-        backgroundColor: '#3B5998',
+        backgroundColor: '#3a5999',
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 20,
@@ -124,10 +151,13 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
     },
     card: {
-        backgroundColor: '#3B5998',
-        padding: 10,
-        borderRadius: 10,
-        marginBottom: 15,
+        backgroundColor: "#D3D3D3",
+        height: 488,
+        width: 347,
+        padding: 28,
+        borderRadius: 20,
+        // alignItems: "center",
+        // elevation: 5, // Bóng đổ giúp card nổi bật
     },
     cardTitle: {
         fontSize: 22,
@@ -148,7 +178,7 @@ const styles = StyleSheet.create({
         flex: 2,
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 20,
+        marginLeft: 20,
     },
     backIcon: {
         width: 40,
@@ -159,5 +189,15 @@ const styles = StyleSheet.create({
         fontSize: 22,
         color: '#3B5998',
         fontWeight: 'bold',
+    },
+    content: {
+        flex: 1,
+        width: '100%',
+        backgroundColor: '#ffffff',
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40,
+        alignItems: 'center',
+        paddingVertical: 5,
+        paddingHorizontal: 15,
     },
 });

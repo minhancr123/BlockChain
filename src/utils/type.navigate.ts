@@ -12,6 +12,17 @@ export type RootStackParamList = {
     ListRequestsRejected: undefined;
     ConfirmCertification: undefined;
     Register1: undefined;
-    Register2: { name: string };
+    Register2: {
+        commonName: string;
+        organization: string;
+        organizationUnit: string;
+        country: string;
+        state: string;
+        locality: string;
+    };
     PinScreen: undefined;
+    RefreshPassword: undefined;
+    DetailIdentity: {
+        id: string;
+    };
 };

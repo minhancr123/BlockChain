@@ -47,6 +47,8 @@ import Register1 from './src/screens/admin/Register1';
 import Register2 from './src/screens/admin/Register2';
 import { RootStackParamList } from './src/utils/type.navigate';
 import { PinScreen } from './src/screens/PinScreen';
+import RefreshPassword from './src/screens/admin/RefreshPassword';
+import DetailIdentity from './src/screens/admin/DetailIdentity';
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -82,7 +84,7 @@ function App(): React.JSX.Element {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
+        <Stack.Navigator initialRouteName="ListIdentity">
           <Stack.Screen
             name="Login"
             component={LoginScreen}
@@ -156,7 +158,17 @@ function App(): React.JSX.Element {
           <Stack.Screen
             name="PinScreen"
             component={PinScreen}
-            options={{ title: 'Register 2', headerShown: false }}
+            options={{ title: 'PinScreen', headerShown: false }}
+          />
+          <Stack.Screen
+            name="RefreshPassword"
+            component={RefreshPassword}
+            options={{ title: 'RefreshPassword', headerShown: false }}
+          />
+          <Stack.Screen
+            name="DetailIdentity"
+            component={DetailIdentity}
+            options={{ title: 'DetailIdentity', headerShown: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>

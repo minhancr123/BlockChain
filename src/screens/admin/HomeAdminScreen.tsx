@@ -26,7 +26,7 @@ const AdminHomeScreen = () => {
                 {/* Hình minh họa */}
                 <View style={styles.illustrationContainer}>
                     <Image
-                        source={require('../../../assets/image/Register.png')}
+                        source={require('../../../assets/image/Logo.png')}
                         style={styles.illustration}
                     />
                 </View>
@@ -46,8 +46,14 @@ const AdminHomeScreen = () => {
                         textStyles={styles.buttonText}
                     />
                     <ShareButton
-                        name="Cấu hình bảo mật"
-                        onPress={() => navigation.navigate('SecuritySettings')}
+                        name="Cấp lại mật khẩu"
+                        onPress={() => navigation.navigate('RefreshPassword')}
+                        btnStyles={styles.button}
+                        textStyles={styles.buttonText}
+                    />
+                    <ShareButton
+                        name="Thêm danh tính"
+                        onPress={() => navigation.navigate('Register1')}
                         btnStyles={styles.button}
                         textStyles={styles.buttonText}
                     />
@@ -109,8 +115,8 @@ const styles = StyleSheet.create({
     },
 
     illustration: {
-        width: 300,
-        height: 300,
+        width: 400,
+        height: 200,
         resizeMode: 'contain',
     },
 

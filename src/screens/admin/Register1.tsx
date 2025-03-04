@@ -6,6 +6,9 @@ import { useNavigation } from '@react-navigation/native';
 import ShareInput from '../../components/ShareInput';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../utils/type.navigate';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Formik } from 'formik';
+import { RegisterSchema1 } from '../../utils/validate.schema';
 
 const styles = StyleSheet.create({
     container: {
@@ -82,85 +85,129 @@ const styles = StyleSheet.create({
 type NavigationProps = StackNavigationProp<RootStackParamList, 'Register1'>;
 
 interface Register1Props {
-    CommonName: string;
-    Organization: string;
+    commonName: string;
+    organization: string;
+    organizationUnit: string;
+    country: string;
+    state: string;
+    locality: string;
 }
 
 const Register1 = () => {
     const navigation = useNavigation<NavigationProps>();
+
+    const handleRegister1 = (commonName: string, organization: string, organizationUnit: string, country: string, state: string, locality: string) => {
+        console.log('Common Name: ', commonName);
+        console.log('Organization: ', organization);
+        console.log('Organization Unit: ', organizationUnit);
+        console.log('Country: ', country);
+        console.log('State or Province: ', state);
+        console.log('Locality: ', locality);
+        navigation.navigate('Register2', {
+            commonName: commonName,
+            organization: organization,
+            organizationUnit: organizationUnit,
+            country: country,
+            state: state,
+            locality: locality,
+        });
+    }
     return (
-        <View style={styles.container}>
-            {/* Hai lớp màu nền */}
-            <View style={{ backgroundColor: APP_COLOR.PRIMARY, height: "30%", alignItems: "center", justifyContent: "center" }}>
-                <Text style={styles.text}>Đăng ký danh tính</Text>
-            </View>
-            <View style={{ backgroundColor: "#ffffff", height: "70%" }} />
+        <SafeAreaView style={{ flex: 1 }}>
+            <Formik
+                validationSchema={RegisterSchema1}
+                initialValues={{
+                    commonName: '',
+                    organization: '',
+                    organizationUnit: '',
+                    country: '',
+                    state: '',
+                    locality: '',
 
-            {/* Card hiển thị thông tin */}
-            <View style={styles.card}>
-                <ShareInput
-                    title="Common Name"
-                    onChangeText={() => console.log('Common Name')}
-                    onBlur={() => console.log('Common Name')}
-                    value={'Common Name'}
-                    errors={'Error Common Name'}
-                />
-                <ShareInput
-                    title="Organization"
-                    onChangeText={() => console.log('Organization')}
-                    onBlur={() => console.log('Organization')}
-                    value={'Organization'}
-                    errors={'Error Organization'}
-                />
-                <ShareInput
-                    title="Organization Unit"
-                    onChangeText={() => console.log('Organization Unit')}
-                    onBlur={() => console.log('Organization Unit')}
-                    value={'Organization Unit'}
-                    errors={'Error Organization Unit'}
-                />
-                <ShareInput
-                    title="Country"
-                    onChangeText={() => console.log('Country')}
-                    onBlur={() => console.log('Country')}
-                    value={'Country'}
-                    errors={'Error Country'}
-                />
-                <ShareInput
-                    title="State or Province"
-                    onChangeText={() => console.log('State or Province')}
-                    onBlur={() => console.log('State or Province')}
-                    value={'State or Province'}
-                    errors={'Error State or Province'}
-                />
-                <ShareInput
-                    title="Locality"
-                    onChangeText={() => console.log('Locality')}
-                    onBlur={() => console.log('Locality')}
-                    value={'Locality'}
-                    errors={'Error Locality'}
-                />
-                <ShareButton
-                    name="Tiếp theo"
-                    onPress={() => navigation.navigate('Register2', { name: 'Register2' })}
-                    textStyles={{
-                        textTransform: 'uppercase',
-                        color: '#fff',
-                        paddingVertical: 5,
-                    }}
-                    pressStyles={{ alignSelf: 'stretch' }}
-                    btnStyles={{
-                        backgroundColor: APP_COLOR.PRIMARY,
-                        justifyContent: 'center',
-                        marginHorizontal: 50,
-                        paddingVertical: 10,
-                        borderRadius: 30,
-                    }}
-                />
-            </View>
+                }}
+                onSubmit={(values) => handleRegister1(values.commonName, values.organization, values.organizationUnit, values.country, values.state, values.locality)}
+            >
+                {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+
+                    <View style={styles.container}>
+                        {/* Hai lớp màu nền */}
+                        <View style={{ backgroundColor: APP_COLOR.PRIMARY, height: "30%", alignItems: "center", justifyContent: "center" }}>
+                            <Text style={styles.text}>Đăng ký danh tính</Text>
+                        </View>
+                        <View style={{ backgroundColor: "#ffffff", height: "70%" }} />
+
+                        {/* Card hiển thị thông tin */}
+                        <View style={styles.card}>
+                            <ShareInput
+                                title="Common Name"
+                                onChangeText={handleChange('commonName')}
+                                onBlur={handleBlur('commonName')}
+                                value={values.commonName}
+                                errors={errors.commonName}
+                            />
+                            <ShareInput
+                                title="Organization"
+                                onChangeText={handleChange('organization')}
+                                onBlur={handleBlur('organization')}
+
+                                value={values.organization}
+                                errors={errors.organization}
+                            />
+                            <ShareInput
+                                title="Organization Unit"
+                                onChangeText={handleChange('organizationUnit')}
+                                onBlur={handleBlur('organizationUnit')}
+
+                                value={values.organizationUnit}
+                                errors={errors.organizationUnit}
+                            />
+                            <ShareInput
+                                title="Country"
+                                onChangeText={handleChange('country')}
+                                onBlur={handleBlur('country')}
+
+                                value={values.country}
+                                errors={errors.country}
+                            />
+                            <ShareInput
+                                title="State or Province"
+                                onChangeText={handleChange('state')}
+                                onBlur={handleBlur('state')}
+                                value={values.state}
+                                errors={errors.state}
+                            />
+                            <ShareInput
+                                title="Locality"
+                                onChangeText={handleChange('locality')}
+                                onBlur={handleBlur('locality')}
+                                value={values.locality}
+                                errors={errors.locality}
+                            />
+                            <ShareButton
+                                name="Tiếp theo"
+                                onPress={handleSubmit}
+                                textStyles={{
+                                    textTransform: 'uppercase',
+                                    color: '#fff',
+                                    paddingVertical: 5,
+                                }}
+                                pressStyles={{ alignSelf: 'stretch' }}
+                                btnStyles={{
+                                    backgroundColor: APP_COLOR.PRIMARY,
+                                    justifyContent: 'center',
+                                    marginHorizontal: 50,
+                                    paddingVertical: 10,
+                                    borderRadius: 30,
+                                }}
+                            />
+                        </View>
 
 
-        </View>
+                    </View>
+                )}
+            </Formik>
+        </SafeAreaView>
+
     );
 };
 

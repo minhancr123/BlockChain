@@ -75,9 +75,9 @@ const styles = StyleSheet.create({
   },
 
   avatar: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    width: 50,
+    height: 50,
+    borderRadius: 25, // Đảm bảo borderRadius bằng một nửa chiều rộng và chiều cao
     borderWidth: 2,
     borderColor: '#ffffff',
     backgroundColor: '#ffffff',

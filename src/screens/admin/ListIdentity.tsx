@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import ShareButton from '../../components/ShareButton';
@@ -6,61 +6,77 @@ import ShareInput from '../../components/ShareInput';
 import { APP_COLOR } from '../../utils/constant';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../utils/type.navigate';
+import { getAllUsers } from '../../utils/api';
+
+
+type NavigationProps = StackNavigationProp<RootStackParamList, 'ListIdentity'>;
 
 const DATA = [
     {
+        title: 'User 1',
         id: '1',
-        title: 'Tên danh tính',
+
     },
     {
+        title: 'User 2',
         id: '2',
-        title: 'Tên danh tính',
     },
     {
+        title: 'User 3',
         id: '3',
-        title: 'Tên danh tính',
     },
     {
+        title: 'User 4',
         id: '4',
-        title: 'Tên danh tính',
     },
     {
+        title: 'User 5',
         id: '5',
-        title: 'Tên danh tính',
     },
     {
+        title: 'User 6',
         id: '6',
-        title: 'Tên danh tính',
     },
     {
+        title: 'User 7',
         id: '7',
-        title: 'Tên danh tính',
     },
     {
+        title: 'User 8',
         id: '8',
-        title: 'Tên danh tính',
     },
     {
+        title: 'User 9',
         id: '9',
-        title: 'Tên danh tính',
     },
     {
+        title: 'User 10',
         id: '10',
-        title: 'Tên danh tính',
     },
-    {
-        id: '11',
-        title: 'Tên danh tính',
-    },
-    {
-        id: '12',
-        title: 'Tên danh tính',
-    },
-];
-type NavigationProps = StackNavigationProp<RootStackParamList, 'ListIdentity'>;
+]
 
 const ListIdentity = () => {
     const navigation = useNavigation<NavigationProps>();
+    const [listUser, setListUser] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await getAllUsers();
+            if (res?.success === true) {
+                const data = res?.users.map((user: any) => {
+                    return {
+                        title: user.username,
+                        id: user.id,
+                    }
+                });
+                setListUser(data);
+            }
+        }
+        fetchData();
+    }, []);
+
+
+
 
     return (
         <SafeAreaView style={styles.container}>
@@ -87,13 +103,13 @@ const ListIdentity = () => {
                 {/* <View style={styles.buttonContainer}> */}
                 <FlatList
                     style={styles.buttonContainer}
-                    data={DATA}
+                    data={listUser}
                     renderItem={({ item }) => {
                         return (
                             <View>
                                 <ShareButton
                                     name={item.title}
-                                    onPress={() => console.log("Hello navigate")}
+                                    onPress={() => navigation.navigate('DetailIdentity', { id: item.id })}
                                     btnStyles={styles.button}
                                     textStyles={styles.buttonText}
                                 />
